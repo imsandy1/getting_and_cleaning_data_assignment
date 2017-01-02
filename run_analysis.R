@@ -1,14 +1,11 @@
-# getting_and_cleaning_data_assignment
 
-
-
+## Download zip file with data
 download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", destfile = 'file.zip')
 
 library(data.table)
 
 unzip("file.zip", exdir = "./data")
 files <- list.files(file.path("./data" , "UCI HAR Dataset"), recursive = TRUE)
-files
 
 ## Load features & activity labels
 features <- read.table("./data/UCI HAR Dataset/features.txt")
@@ -57,5 +54,5 @@ tidy_data <- melt(merged_data, id.vars = 1:3, measure.vars = 4:82)
 ## Get means
 tidy_data_means <- dcast(tidy_data, subject + activity_name ~ variable, mean)
 
-## write the means output into a text file
-write.table(tidy_data_means, file = "./tidy_data_means.txt", row.names = FALSE)
+## Export means output into text file
+write.table(tidy_data_means, file = "./tidy_data_means.txt")
